@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:mine/pages/bottompages/profile.dart';
 
-class Market extends StatelessWidget {
-  const Market({
+class Weather extends StatelessWidget {
+  const Weather({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Color.fromARGB(255, 40, 49, 27),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 85, 139, 47),
         title: const Text(
-          "Market",
+          "Weather",
           style: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),

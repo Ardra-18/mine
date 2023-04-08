@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mine/bottomnav.dart';
 
 class Profile extends StatelessWidget {
   const Profile({
@@ -7,97 +8,175 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 85, 139, 47), //Colors.white,
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 85, 139, 47),
-        title: const Text(
-          "Profile",
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-        ),
-        elevation: 0,
-      ),
+      backgroundColor: Colors.white,
       body: Container(
-        padding: const EdgeInsets.only(
-            top: 20.0), //to adjust space between circle and top
-        child: Stack(children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(top: 80.0),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            decoration: const BoxDecoration(
-                color: Colors
-                    .white, //Color.fromARGB(255, 220, 237, 200), //Color.fromARGB(255, 178, 203, 145),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20))), //radius of edit icon
-            child: Column(
-              children: const <Widget>[
-                SizedBox(
-                  height: 50.0,
-                ),
-              ],
-            ),
-          ),
-          Container(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Stack(
-                children: <Widget>[
-                  ClipOval(
-                      child: Image.asset(
-                    'assets/images/one.jpg',
-                    width: 150,
-                    height: 150,
-                    fit: BoxFit.cover,
-                  )),
-                  Positioned(
-                    bottom: 8,
-                    right: 8,
+        color: const Color.fromARGB(224, 85, 139, 47),
+        padding: const EdgeInsets.all(16),
+        height: size.height,
+        width: size.width,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (builder) => const BottomPage()));
+                    },
                     child: Container(
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: const BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
-                        child: const Icon(
-                          Icons.edit,
-                          size: 30.0,
-                        )),
+                      // padding: EdgeInsets.only(top: 30),
+                      margin: const EdgeInsets.only(top: 30),
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: Colors.white,
+                      ),
+                      child: const Icon(
+                        Icons.arrow_back_rounded,
+                        color: Color.fromARGB(255, 85, 139, 47),
+                        size: 30,
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-          ),
-          Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.only(top: 160),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Text(
-                  'Ardra S M',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
+              Container(
+                width: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 3.0,
+                  ),
                 ),
-                SizedBox(height: 10),
-              ],
-            ),
+                child: const CircleAvatar(
+                  radius: 60,
+                  backgroundImage: ExactAssetImage('assets/images/one.jpg'),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              SizedBox(
+                width: size.width * .3,
+                child: Row(
+                  children: const [
+                    Text(
+                      '  Ardra S M',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 24,
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              SingleChildScrollView(
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20)),
+                  child: SizedBox(
+                    //height: size.height,
+                    width: size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const ProfileWidget(
+                          icon: Icons.person,
+                          title: 'My Profile',
+                        ),
+                        const ProfileWidget(
+                          icon: Icons.settings,
+                          title: 'Settings',
+                        ),
+                        const ProfileWidget(
+                          icon: Icons.notifications,
+                          title: 'Notifications',
+                        ),
+                        const ProfileWidget(
+                          icon: Icons.share,
+                          title: 'Share',
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const ProfileWidget(
+                            icon: Icons.logout,
+                            title: 'Log Out',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 230),
-            padding: const EdgeInsets.symmetric(horizontal: 40),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text('About',
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
-                Text('Hi I am Ardra', style: TextStyle(fontSize: 20)),
-              ],
-            ),
+        ),
+      ),
+    );
+  }
+}
+
+class ProfileWidget extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  const ProfileWidget({
+    Key? key,
+    required this.icon,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 18),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                icon,
+                color: Colors.black,
+                size: 24,
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+          const Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.black,
+            size: 16,
           )
-        ]),
+        ],
       ),
     );
   }

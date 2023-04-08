@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mine/pages/bottompages/homepage.dart';
 import 'package:mine/pages/bottompages/favcrop.dart';
-import 'package:mine/pages/bottompages/market.dart';
-import 'package:mine/pages/bottompages/comm.dart';
+import 'package:mine/pages/bottompages/news.dart';
+import 'package:mine/pages/bottompages/scanpage.dart';
 import 'package:mine/pages/bottompages/profile.dart';
 
 class BottomPage extends StatefulWidget {
@@ -17,9 +17,11 @@ class _BottomPageState extends State<BottomPage> {
   int _selectedIndex = 0;
   final List<Widget> _children = [
     const Home(),
-    const Fav(),
-    const Market(),
-    const Comm(),
+    const Scan(),
+    const FavoritePage(
+      favoritedPlants: [],
+    ),
+    const News(),
     const Profile(),
   ];
 
@@ -43,16 +45,16 @@ class _BottomPageState extends State<BottomPage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.qr_code_scanner_rounded),
+            label: 'Scan',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.favorite),
             label: 'Your Crops',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Market',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people_alt),
-            label: 'Community',
+            icon: Icon(Icons.newspaper_outlined),
+            label: 'News',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_sharp),

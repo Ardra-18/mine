@@ -74,8 +74,8 @@ class _NpkState extends State<Npk> {
                             boxShadow: const [
                               BoxShadow(
                                   color: Color.fromARGB(255, 85, 139, 47),
-                                  blurRadius: 20,
-                                  offset: Offset(0, 10))
+                                  blurRadius: 10,
+                                  offset: Offset(2, 5))
                             ]),
                         child: Column(
                           children: <Widget>[
@@ -147,9 +147,14 @@ class _NpkState extends State<Npk> {
                         height: 50,
                         margin: const EdgeInsets.symmetric(horizontal: 50),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: const Color.fromARGB(255, 85, 139, 47),
-                        ),
+                            borderRadius: BorderRadius.circular(50),
+                            color: const Color.fromARGB(255, 85, 139, 47),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromARGB(146, 85, 139, 47),
+                                  blurRadius: 5 ,
+                                  offset: Offset(2, 5))
+                            ]),
                         child: const Center(
                           child: Text(
                             "SUBMIT",

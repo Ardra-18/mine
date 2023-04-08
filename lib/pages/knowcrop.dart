@@ -1,66 +1,19 @@
-//import 'dart:math';
-
 import 'package:flutter/material.dart';
-//import 'package:flutter_plant_shop_ui/detail.dart';
-//import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:mine/pages/gitfold/details.dart';
+import 'package:mine/pages/cropdetails.dart';
+import 'package:mine/model/cropmodel.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Crop extends StatefulWidget {
+  const Crop({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _HomePageState createState() => _HomePageState();
+  _CropState createState() => _CropState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final List<Product> _product = [
-    Product(
-      image: 'assets/images/Mango.png',
-      title: 'Succulent',
-      price: 29.99,
-      desc:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    ),
-    Product(
-      image: 'assets/images/Banana.png',
-      title: 'Dragon ',
-      price: 25.99,
-      desc:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    ),
-    Product(
-      image: 'assets/images/Mango.png',
-      title: 'Raevnea ',
-      price: 22.99,
-      desc:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    ),
-    Product(
-      image: 'assets/images/tomato.png',
-      title: 'Potted ',
-      price: 24.99,
-      desc:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    ),
-    Product(
-      image: 'assets/images/crop1.png',
-      title: 'Ipsum ',
-      price: 30.99,
-      desc:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    ),
-    Product(
-      image: 'assets/images/crop1.png',
-      title: 'Lorem ',
-      price: 19.99,
-      desc:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    ),
-  ];
-
+class _CropState extends State<Crop> {
   @override
   Widget build(BuildContext context) {
+    List<Product> products = Product.product;
     return Scaffold(
       backgroundColor: Colors.white, // Color.fromARGB(255, 40, 49, 27),
       appBar: AppBar(
@@ -82,35 +35,38 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Expanded(
-                child: Text(
-                  ' Welcome to Plant Shop',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    ' Know Your Crops',
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               //Icon(Icons.shopping_cart_rounded,size: 30,)
             ],
           ),
           const Padding(
-            padding: EdgeInsets.symmetric(vertical: 15),
+            padding: EdgeInsets.symmetric(vertical: 10),
           ),
           //  const SizedBox(height: 24,),
           Expanded(
               child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       //maxCrossAxisExtent: 200,
-                      mainAxisExtent: 220,
+                      mainAxisExtent: 120,
                       crossAxisCount: 2,
                       childAspectRatio: 1 / 1,
                       crossAxisSpacing: 20,
                       mainAxisSpacing: 20),
-                  itemCount: _product.length,
+                  itemCount: products.length,
                   itemBuilder: (BuildContext context, index) {
                     return InkWell(
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => DetailPage(
-                              product: _product[index],
+                              id: products[index].id,
                             ),
                           ),
                         );
@@ -118,15 +74,21 @@ class _HomePageState extends State<HomePage> {
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16.0),
-                            color: Colors.blue),
+                            color: const Color.fromARGB(255, 85, 139, 47),
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Color.fromARGB(153, 85, 139, 47),
+                                  blurRadius: 5,
+                                  offset: Offset(0, 5))
+                            ]),
                         child: Column(children: [
                           ClipRRect(
                             borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(16.0),
                                 topRight: Radius.circular(16.0)),
                             child: Image.asset(
-                              _product[index].image,
-                              height: 170,
+                              products[index].image,
+                              height: 90,
                               width: double.infinity,
                               fit: BoxFit.cover,
                             ),
@@ -135,9 +97,11 @@ class _HomePageState extends State<HomePage> {
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
                               children: [
-                                Text(_product[index].title,
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold))
+                                Text(products[index].title,
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.w600))
                               ],
                             ),
                           )
@@ -314,17 +278,4 @@ class _HomePageState extends State<HomePage> {
     */
   }
   */
-}
-
-class Product {
-  String title;
-  double price;
-  String image;
-  String desc;
-
-  Product(
-      {required this.title,
-      required this.price,
-      required this.image,
-      required this.desc});
 }

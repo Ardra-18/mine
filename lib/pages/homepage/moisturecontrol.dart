@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:mine/pages/bottompages/profile.dart';
 
-class Comm extends StatelessWidget {
-  const Comm({
+class Moisture extends StatefulWidget {
+  const Moisture({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<Moisture> createState() => _MoistureState();
+}
+
+class _MoistureState extends State<Moisture> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.white, // Color.fromARGB(255, 40, 49, 27),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 85, 139, 47),
         title: const Text(
-          "Community",
+          "Moisture Control",
           style: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ),
